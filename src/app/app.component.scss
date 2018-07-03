@@ -1,0 +1,39 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  .form-field {
+    width: 500px;
+  }
+  button {
+    margin: 10px;
+  }
+  .task-list {
+    .completed {
+      background: #ececec;
+      height: 10px;
+      span {
+        text-decoration: line-through;
+      }
+    }
+    .task-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      span {
+        flex-grow: 3;
+        text-align: left;
+      }
+      form {
+        flex-grow: 3;
+        text-align: left;
+      }
+    }
+  }
+}

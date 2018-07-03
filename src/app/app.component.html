@@ -1,0 +1,41 @@
+<mat-toolbar class="toolbar" color="primary">
+  <h1>TODO</h1>
+  <span>{{tasks.length > 0 ? 'Колличество задач: ' + tasks.length : 'Еще нет задач ...'}}</span>
+</mat-toolbar>
+<div class="wrapper">
+  <mat-card class="task-add">
+    <form [formGroup]="form" (submit)="submit()">
+      <mat-form-field class="form-field">
+        <input type="text" matInput formControlName="task" placeholder="Введите задачу">
+      </mat-form-field>
+      <button mat-raised-button color="primary">Добавить</button>
+    </form>
+  </mat-card>
+
+  <div *ngFor="let task of tasks" class="task-list">
+    <mat-card class="task-item" [class.completed]="task.completed">
+      <button color="primary" mat-icon-button (click)="checkTask(task)">
+        <mat-icon>
+          {{ task.completed ? 'check_box' : 'check_box_outline_blank' }}
+        </mat-icon>
+      </button>
+
+      <span *ngIf="!task.editNow">{{task.title}}</span>
+
+      <form *ngIf="task.editNow" [formGroup]="editForm" (submit)="confirmEdit(task)">
+        <mat-form-field class="form-field">
+          <input type="text" matInput formControlName="task" [value]="task.title">
+        </mat-form-field>
+        <button mat-raised-button color="accent">Редактировать</button>
+      </form>
+
+      <button mat-icon-button (click)="editTask(task)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button color="warn" mat-icon-button (click)="deleteTask(tasks.indexOf(task))">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+</div>
+
